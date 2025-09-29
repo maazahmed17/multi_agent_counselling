@@ -1,0 +1,30 @@
+# Python bytecode and artifacts
+__pycache__/
+*.pyc
+build/
+dist/
+*.egg-info/
+
+# Virtual Environment 
+# Never commit your environment folder, only the ai_env.yml file
+/ai_env/
+
+# IDE & Editor specific files
+.vscode/
+.idea/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Data Files - CRITICAL
+# Git is not designed for large data files.
+# Add your data directories here.
+/data_lake/
+/india_resources/
+/mentalchat16k/
+/pku_safer/hf/
+
+# Secrets and environment variables
+# Never commit API keys or other secrets!
+.env
+*.env
