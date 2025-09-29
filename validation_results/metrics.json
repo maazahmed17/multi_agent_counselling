@@ -1,0 +1,15 @@
+{
+  "base_model": {
+    "loss": 2.020760955810547,
+    "perplexity": 7.544063448923339
+  },
+  "finetuned_model": {
+    "loss": 1.0469932454824447,
+    "perplexity": 2.8490717671189545
+  },
+  "improvement": {
+    "loss_delta": 0.9737677103281022,
+    "perplexity_ratio": 2.647902217132307
+  },
+  "validation_time_seconds": 384.3090252876282
+}
