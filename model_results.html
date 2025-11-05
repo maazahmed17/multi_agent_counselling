@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anxiety AI Model Comparison - Side by Side</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+        }
+
+        .header {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .comparison-entry {
+            background: white;
+            margin-bottom: 40px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 2px solid #e9ecef;
+        }
+
+        .prompt-section {
+            background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+            color: white;
+            padding: 25px;
+            font-size: 16px;
+            font-weight: 500;
+            border-bottom: 3px solid #0984e3;
+        }
+
+        .responses-container {
+            display: flex;
+            min-height: 500px;
+        }
+
+        .response-column {
+            flex: 1;
+            padding: 25px;
+        }
+
+        .base-response {
+            background: linear-gradient(to bottom, #fff5f5 0%, #ffffff 100%);
+            border-right: 3px solid #e74c3c;
+        }
+
+        .finetuned-response {
+            background: linear-gradient(to bottom, #f0fff4 0%, #ffffff 100%);
+            border-left: 3px solid #27ae60;
+        }
+
+        .response-header {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .base-header {
+            background: #e74c3c;
+            color: white;
+        }
+
+        .finetuned-header {
+            background: #27ae60;
+            color: white;
+        }
+
+        .response-text {
+            font-size: 14px;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            text-align: justify;
+            padding: 15px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 8px;
+            border-left: 4px solid #ddd;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .entry-number {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #6c757d;
+            font-size: 14px;
+        }
+
+        @media (max-width: 768px) {
+            .responses-container {
+                flex-direction: column;
+            }
+            .base-response, .finetuned-response {
+                border: none;
+                border-bottom: 3px solid #ddd;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 Anxiety AI Model Comparison</h1>
+            <p>Side-by-Side Analysis of Base vs Fine-tuned Therapeutic Responses</p>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Total Comparisons</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">CBT</div>
+                <div class="stat-label">Therapy Focus</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">Anxiety</div>
+                <div class="stat-label">Specialization</div>
+            </div>
+        </div>
+
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 1</div>
+                <div><strong>User Query:</strong> I&#x27;m having panic attacks before exams. What are 3 CBT techniques I can use right now?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">s. Here are three CBT techniques you can use right now to help calm your anxiety:
+
+1. **5-4-3-2-1 Grounding Technique**: This technique helps you focus on the present moment and distract you from anxious thoughts. Take a few deep breaths and notice:
+	* 5 things you can see around you (e.g., a chair, a book, a picture).
+	* 4 things you can touch or feel (e.g., your feet on the ground, the chair beneath you).
+	* 3 things you can hear (e.g., a clock ticking, a bird chirping).
+	* 2 things you can smell (e.g., a scented candle, fresh air).
+	* 1 thing you can taste (e.g., a piece of gum, a sip of</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">three techniques you can try:
+
+1. Deep Breathing Exercise: This technique involves taking slow, deep breaths to calm your body and mind. Sit comfortably, close your eyes, and focus on your breath. Inhale slowly through your nose, filling your lungs completely, and then exhale slowly through your mouth. Repeat this process several times, focusing on the sensation of the breath moving in and out of your body.
+
+2. Grounding Technique: This technique helps you focus on the present moment and distract yourself from your anxiety. Choose an object in your environment, such as a chair or a book, and focus on its details. Notice its shape, color, texture, and any other characteristics that stand out to you. By focusing on the object, you can shift your attention away from your anxiety and bring yourself back to the present moment.
+
+3.</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 2</div>
+                <div><strong>User Query:</strong> I avoid social events because I fear judgment. Can you give me a step-by-step exposure plan?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">nt to acknowledge that it takes a lot of courage to confront fears like this. You&#x27;re already taking a huge step by seeking help.
+
+To create a personalized exposure plan, let&#x27;s break it down into manageable steps. Please feel free to adjust them as needed to suit your comfort level.
+
+**Step 1: Identify your goals and motivations**
+
+What do you hope to achieve by facing your fear of judgment? What are your long-term goals? For example, do you want to attend social gatherings, join a club or group, or simply feel more confident in everyday interactions?
+
+**Step 2: Assess your current situation**
+
+What specific situations or events trigger your fear of judgment? Are there any specific social situations that make you feel anxious? For example, is it parties, meetings, or small talk?
+
+**Step 3: Gradual exposure**
+
+We</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">guidance and support.</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 3</div>
+                <div><strong>User Query:</strong> My anxiety keeps me awake at night with racing thoughts. What can I do?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">control.
+
+First, let&#x27;s acknowledge that it&#x27;s completely normal to have racing thoughts at night. Many people experience this, and it&#x27;s not a reflection of your worth or sanity. It&#x27;s a common symptom of anxiety.
+
+To help you manage these racing thoughts and improve your sleep, let&#x27;s try a few strategies together. Please feel free to modify or discard them as you see fit, and we can work together to find what works best for you.
+
+1. **Grounding techniques**: When you feel your thoughts racing, try to focus on your five senses:
+	* Notice the sensation of your feet on the bed or the floor.
+	* Listen to the sounds around you, like the hum of the air conditioner or the sound of your breathing.
+	* Feel the sensation of the air on your skin or the weight of your blankets</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">suggestions that may help:
+
+1. Practice relaxation techniques: Deep breathing exercises, progressive muscle relaxation, or guided imagery can help calm your mind and body. You can find guided recordings online or through apps like Calm or Headspace.
+
+2. Establish a bedtime routine: Develop a consistent pre-sleep routine that signals to your brain that it&#x27;s time to wind down. This could include activities like reading a book, taking a warm bath, or listening to soothing music.
+
+3. Limit screen time before bed: The blue light emitted from screens can interfere with your sleep-wake cycle. Try to avoid screens for at least an hour before bedtime or use blue light filtering glasses or apps.
+
+4. Create a sleep-conducive environment: Ensure your bedroom is dark, quiet, and at a comfortable temperature. Consider using earplugs, a white noise machine, or blackout curtains</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 4</div>
+                <div><strong>User Query:</strong> I feel overwhelmed at work and can&#x27;t focus. How can I manage this anxiety?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">velop some strategies to help you manage your anxiety and improve your productivity.
+
+First, let&#x27;s acknowledge that it&#x27;s completely normal to feel overwhelmed, especially when faced with a heavy workload or multiple tasks. It&#x27;s not a sign of weakness, but rather a signal that you need to take a step back and reassess your approach.
+
+To start, can you tell me more about what&#x27;s causing your anxiety at work? Is it a specific task, a project, or a general feeling of being overwhelmed by your workload?
+
+Also, on a scale of 0 to 10, how would you rate your anxiety level right now, with 0 being &quot;not anxious at all&quot; and 10 being &quot;extremely anxious&quot;?
+
+Remember, this is a safe and non-judgmental space. We&#x27;re here to work together to find ways to manage your anxiety and improve</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">tegies that may help. First, it&#x27;s essential to identify the specific triggers that contribute to your anxiety. Is it the workload, deadlines, or perhaps a particular task or situation? Once you understand what triggers your anxiety, you can develop coping mechanisms to address them.
+
+One effective strategy is to break down your tasks into smaller, manageable chunks. This can help reduce feelings of overwhelm and make it easier to focus on one task at a time. Additionally, setting realistic goals and deadlines can help you stay organized and motivated.
+
+Another approach is to practice relaxation techniques, such as deep breathing exercises, progressive muscle relaxation, or mindfulness meditation. These techniques can help calm your mind and body, reducing anxiety and improving focus.
+
+It&#x27;s also important to prioritize self-care and take breaks throughout the day. Taking short breaks can help you recharge and come back to your tasks with renewed energy and focus.</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 5</div>
+                <div><strong>User Query:</strong> I&#x27;m having relationship anxiety after a fight with my partner. How should I approach this?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">t&#x27;s work together to break it down and find a way to manage your anxiety.
+
+First, take a deep breath and know that you&#x27;re not alone in feeling this way. It&#x27;s normal to experience anxiety after a disagreement, especially if it was a significant one.
+
+To start, can you tell me a bit more about what happened during the fight and how you&#x27;re feeling now? What are some of the thoughts and emotions that are swirling around in your mind?
+
+Also, before we dive in, I want to assure you that our conversation is a safe space. I&#x27;m here to listen without judgment and offer guidance to help you work through your anxiety.
+
+As we talk, I&#x27;ll be using some CBT (Cognitive Behavioral Therapy) techniques to help you identify and challenge any negative thought patterns that might be contributing to your anxiety. Sound good?
+
+Let&#x27;s begin</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">e to approach this situation in a healthy way.
+
+Firstly, it&#x27;s essential to acknowledge your feelings and give yourself permission to process them. Allow yourself to feel the emotions that arise, whether it&#x27;s sadness, anger, or frustration. Recognizing your emotions will help you better understand what you need to work through.
+
+Next, consider taking some time for self-reflection. Ask yourself questions like: What triggered the fight? What were the underlying issues that led to the conflict? What can I learn from this experience? Reflecting on these questions can provide valuable insights into the dynamics of your relationship and help you identify areas for improvement.
+
+Communication is key in any relationship, especially when dealing with anxiety. Approach the conversation with your partner in a calm and non-confrontational manner. Use &quot;I&quot; statements instead of &quot;you&quot; statements, which can come across as accusatory</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 6</div>
+                <div><strong>User Query:</strong> I&#x27;m terrified of public speaking. Can you help me prepare using CBT methods?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">ether to develop a plan to help you feel more confident and prepared.
+
+Before we begin, I want to acknowledge that it&#x27;s okay to feel scared or nervous. It&#x27;s a natural response to a perceived threat or challenge. Our goal is to work with these feelings, rather than trying to eliminate them entirely. We&#x27;ll focus on developing coping skills and strategies to help you manage your anxiety.
+
+To start, let&#x27;s break down the situation into smaller, manageable parts. What&#x27;s the specific situation that&#x27;s causing you distress? Is it:
+
+1. A presentation at work or school?
+2. A speech at a social event?
+3. A meeting with a group of people?
+4. Something else?
+
+Also, on a scale of 0-10, how would you rate your anxiety level when thinking about this situation? (0 being &quot;not</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">an be a helpful approach in addressing your fears and improving your public speaking skills. Here are some steps you can take using CBT methods:
+
+1. Identify and challenge negative thoughts: Start by becoming aware of your negative thoughts and beliefs about public speaking. For example, you might think, &quot;I&#x27;m going to fail,&quot; or &quot;I&#x27;m not good enough.&quot; Challenge these thoughts by asking yourself if they are based on facts or if they are exaggerated or distorted. Replace these negative thoughts with more balanced and realistic ones, such as, &quot;I&#x27;ve prepared well for this presentation,&quot; or &quot;I can handle any questions that come my way.&quot;
+
+2. Practice relaxation techniques: Deep breathing exercises, progressive muscle relaxation, and visualization can help you relax and reduce your anxiety. Practice these techniques regularly, especially before you have to give a presentation.
+
+3. Focus on the</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 7</div>
+                <div><strong>User Query:</strong> I worry constantly about things I can&#x27;t control. How do I break this pattern?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">rrying about things you can&#x27;t control is a process, but it&#x27;s definitely possible with the right strategies. Let&#x27;s work together to develop a plan to help you manage your anxiety.
+
+First, let&#x27;s acknowledge that it&#x27;s normal to have some level of worry about things that are outside of our control. However, when worry becomes overwhelming and interferes with your daily life, it&#x27;s time to take action.
+
+Here&#x27;s a step-by-step approach we can use:
+
+1.  **Identify your worries**: Take some time to write down all the things that come to mind that you worry about. Be as specific as possible. For example, instead of &quot;I worry about my health,&quot; write &quot;I worry about getting a serious illness&quot; or &quot;I worry about having a car accident.&quot;
+2.  **Categorize your worries**: Group your worries into three</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">lf-awareness, coping strategies, and gradual exposure to the things that trigger your worries. Here are some steps you can take:
+
+1. Identify your triggers: Take some time to reflect on what specifically triggers your worries. Is it news, social media, or certain situations? Once you understand what triggers your worries, you can develop strategies to manage them.
+
+2. Practice mindfulness: Mindfulness techniques can help you stay present and focused on the current moment, rather than getting caught up in worries about the future or past. You can try mindfulness exercises such as deep breathing, meditation, or yoga to help you stay grounded.
+
+3. Challenge negative thoughts: Often, our worries are fueled by negative thoughts and catastrophic thinking. Challenge these thoughts by asking yourself if they are based on reality or if they are exaggerated. Try to reframe your thoughts in a more balanced and realistic way.
+
+4</div>
+                </div>
+            </div>
+        </div>
+    
+        <div class="comparison-entry">
+            <div class="prompt-section">
+                <div class="entry-number">Entry 8</div>
+                <div><strong>User Query:</strong> I feel anxious in crowded places like trains. What grounding techniques can help?</div>
+            </div>
+
+            <div class="responses-container">
+                <div class="response-column base-response">
+                    <div class="response-header base-header">
+                        🤖 Base Model Response
+                    </div>
+                    <div class="response-text">e a great way to help you cope with these feelings. Let&#x27;s explore some strategies together.
+
+Before we dive in, I want to acknowledge that it&#x27;s okay to feel anxious, and it&#x27;s not a sign of weakness. We&#x27;ll work together to find techniques that help you feel more comfortable and in control.
+
+Here are some grounding techniques that might help:
+
+1. **5-4-3-2-1 Exercise**: When you start to feel anxious, take a few deep breaths and notice:
+	* 5 things you can see around you (e.g., people, advertisements, seats)
+	* 4 things you can touch or feel (e.g., the seat, your feet on the floor, the air on your skin)
+	* 3 things you can hear (e.g., the train&#x27;s engine, conversations, announcements)
+	*</div>
+                </div>
+
+                <div class="response-column finetuned-response">
+                    <div class="response-header finetuned-header">
+                        ✨ Fine-tuned Model Response
+                    </div>
+                    <div class="response-text">Take slow, deep breaths in through your nose and out through your mouth. Focus on the sensation of the breath moving in and out of your body. This can help calm your nervous system and reduce feelings of anxiety.
+
+2. Progressive muscle relaxation: Tense and then relax different muscle groups in your body, starting with your toes and moving up to your head. This can help release physical tension and promote relaxation.
+
+3. Mindfulness meditation: Focus on the present moment and observe your thoughts and feelings without judgment. You can use a guided meditation app or simply pay attention to your breath, a sensation in your body, or the sounds around you.
+
+4. Grounding statements: Repeat phrases like &quot;I am safe,&quot; &quot;I am in control,&quot; or &quot;I can handle this&quot; to yourself. This can help shift your focus away from anxious thoughts and towards</div>
+                </div>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
