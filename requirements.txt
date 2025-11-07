@@ -253,3 +253,13 @@ xxhash==3.5.0
 yarl==1.20.1
 zipp @ file:///home/conda/feedstock_root/build_artifacts/zipp_1749421620841/work
 zstandard==0.25.0
+accelerate
+bitsandbytes
+datasets
+numpy
+pandas
+peft
+psutil
+torch
+tqdm
+transformers
