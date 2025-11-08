@@ -7,10 +7,10 @@ export default function SerenityDashboard() {
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = async () => {
-    if (!message.trim() || isLoading) return;
+  const sendMessage = async (messageText) => {
+    if (!messageText.trim() || isLoading) return;
     
-    const userMessage = message.trim();
+    const userMessage = messageText.trim();
     setMessage("");
     
     setChatHistory(prev => [...prev, { type: 'user', text: userMessage }]);
@@ -51,6 +51,14 @@ export default function SerenityDashboard() {
     }
   };
 
+  const handleSend = () => {
+    sendMessage(message);
+  };
+
+  const handleCardClick = (cardMessage) => {
+    sendMessage(cardMessage);
+  };
+
   return (
     <div className="min-h-screen flex bg-gradient-to-br from-[#E0E9FF] to-[#F6F6F9] text-gray-900">
       {/* Sidebar */}
@@ -74,19 +82,34 @@ export default function SerenityDashboard() {
           {/* Cards - Only show when no chat history */}
           {chatHistory.length === 0 && (
             <div className="grid md:grid-cols-3 gap-6 mb-12">
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleCardClick("I'm feeling anxious and could use some support")}
+                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+              >
                 <div className="text-4xl mb-3">😊</div>
                 <h3 className="text-xl font-semibold mb-1">I feel anxious</h3>
                 <p className="text-gray-500 text-sm">Get support</p>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleCardClick("I'm doing okay, just wanted to check in and have a chat")}
+                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+              >
                 <div className="text-4xl mb-3">🔒</div>
                 <h3 className="text-xl font-semibold mb-1">I'm doing okay</h3>
                 <p className="text-gray-500 text-sm">Let's have a chat</p>
               </motion.div>
 
-              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+              <motion.div 
+                whileHover={{ scale: 1.05 }} 
+                whileTap={{ scale: 0.95 }}
+                onClick={() => handleCardClick("I need help now and need to talk to someone urgently")}
+                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+              >
                 <div className="text-4xl mb-3">⚠️</div>
                 <h3 className="text-xl font-semibold mb-1">I need help now</h3>
                 <p className="text-gray-500 text-sm">Access resources</p>
