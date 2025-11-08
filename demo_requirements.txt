@@ -1,0 +1,15 @@
+# Core orchestration (with compatible versions)
+langgraph==0.2.62
+langchain==0.3.14
+langchain-core>=0.3.29
+
+# API clients
+huggingface-hub==0.26.5
+requests==2.32.3
+
+# Web UI
+streamlit==1.41.1
+
+# Utilities
+python-dotenv==1.0.1
+pydantic==2.10.4
