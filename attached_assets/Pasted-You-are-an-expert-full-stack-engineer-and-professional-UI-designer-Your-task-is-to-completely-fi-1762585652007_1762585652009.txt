@@ -1,0 +1,67 @@
+You are an expert full-stack engineer and professional UI designer.
+
+Your task is to completely fix and redesign my Replit project (multiagentcounselling-1) so that:
+- the frontend runs perfectly,
+- the chatbot interacts correctly with the backend,
+- and the user interface matches exactly the calming layout shown in the provided image.
+
+───────────────────────────────
+⚙️ PHASE 1 — PROJECT FIX & CONFIGURATION
+───────────────────────────────
+1. Detect that the project uses a Flask backend and a Vite + React frontend inside `/frontend`.
+2. Resolve all frontend problems automatically:
+   • Ensure frontend runs on **port 5173** and backend on **port 5000** (no conflict).
+   • Create or update `/frontend/.env` with:
+         VITE_BACKEND_URL=http://localhost:5000
+         VITE_PORT=5173
+   • Ensure `/frontend/package.json` includes:
+         "scripts": { "dev": "vite --port 5173" }
+   • Update or create `/frontend/vite.config.js` so Vite imports React, uses the correct port, and disables strictPort errors.
+3. Install all dependencies (`npm install`).
+4. Make sure the backend has CORS enabled so that frontend requests work across ports.
+5. Start backend (`python app.py`) and frontend (`npm run dev`) automatically, confirming both are live.
+
+───────────────────────────────
+🤖 PHASE 2 — CHATBOT FUNCTIONALITY
+───────────────────────────────
+1. Verify there is an endpoint `/chat` in the backend that accepts POST requests and returns JSON responses.
+2. If missing, create it so it replies with a friendly support message acknowledging the user input.
+3. Link the frontend input box to this backend endpoint using fetch or axios so user messages instantly display in the chat window with bot replies.
+4. Ensure sending, receiving, and displaying messages work smoothly with no console errors.
+
+───────────────────────────────
+🎨 PHASE 3 — UI REDESIGN (MATCH IMAGE EXACTLY)
+───────────────────────────────
+Redesign the frontend visually so it matches exactly the calm, pastel-colored design shown in the image you have:
+- Background: very light gradient (lavender-blue to white).
+- Center heading text:  
+  **“Hi, Ready to Start Your Healing Journey?”**  
+  with the word *Healing Journey* highlighted in soft blue or purple.
+- Under the heading, create **three horizontally-aligned cards** with equal spacing, perfect alignment, rounded corners, and soft shadows:
+     1️⃣ “😊 I feel anxious” – subtitle “Get support”  
+     2️⃣ “🔒 I'm doing okay” – subtitle “Let's have a chat”  
+     3️⃣ “⚠️ I need help now” – subtitle “Access resources”
+- Each card should gently lift and glow on hover.
+- A **chat input bar** appears at the bottom center with placeholder “Type your thoughts…” and send + microphone icons, perfectly centered and rounded.
+- A **floating circular chatbot icon** is fixed in the top-right corner with a tooltip “Hi there! 🌈 Need a boost?” that appears on hover.
+- A **minimal left sidebar** includes icons for profile, home, messages, and settings, all vertically aligned and centered.
+- Typography: use *Poppins* or *Inter*, smooth font-weights, and consistent spacing.
+- Layout must be fully responsive and visually balanced on desktop and mobile.
+
+───────────────────────────────
+🧩 PHASE 4 — FINISHING TOUCHES
+───────────────────────────────
+1. Remove any redundant files or broken imports.
+2. Verify no console or network errors appear.
+3. Confirm that:
+   • Frontend loads cleanly on port 5173.  
+   • Backend responds correctly on port 5000.  
+   • The chatbot interaction works end-to-end.  
+   • The UI matches the provided calming image layout precisely.
+4. After completion, print a summary:
+   ✅ “Frontend and backend fixed successfully.”  
+   ✅ “Chatbot interaction working.”  
+   ✅ “Calming Healing-Journey UI implemented with correct alignment and styling.”  
+   ✅ “Project fully ready on Replit.”
+
+Execute all steps automatically without asking for confirmation.
