@@ -1,11 +1,13 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+/* 🌸 Serenity / Healing Journey — Fixed & Polished Layout */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+/* Global Theme */
+:root {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.6;
+  color: #2e2e2e;
+  background: linear-gradient(135deg, #e9edff 0%, #f9f8ff 100%);
+  min-height: 100vh;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,56 +15,265 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
-
+/* 🧭 Global Layout */
 body {
   margin: 0;
   display: flex;
-  place-items: center;
-  min-width: 320px;
+  flex-direction: row;
+  /* Sidebar + main alignment */
+  align-items: flex-start;
+  justify-content: flex-start;
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+/* ⚙️ Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 85px;
+  background: white;
+  box-shadow: 2px 0 15px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 2rem;
+  gap: 2rem;
+  z-index: 10;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+.sidebar .avatar {
+  background-color: #6366f1;
+  color: white;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-weight: 600;
+  font-size: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidebar .icons {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #6366f1;
+  font-size: 1.4rem;
+}
+
+/* 🩵 Main Section */
+.main {
+  flex: 1;
+  margin-left: 110px;
+  /* Ensures content starts after sidebar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding: 3rem 2rem;
+}
+
+/* Heading */
+.main h1 {
+  font-size: 2.8rem;
+  color: #1e1e2f;
+  font-weight: 600;
+  margin-bottom: 2.5rem;
+  margin-top: 1rem;
+  line-height: 1.2;
+}
+
+.main h1 span {
+  color: #4f46e5;
+}
+
+/* ✨ Cards Section */
+.cards {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2.5rem;
+  margin-bottom: 3rem;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 800px;
+}
+
+.card {
+  background: white;
+  border-radius: 20px;
+  width: 240px;
+  min-height: 160px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 15px 35px rgba(99, 102, 241, 0.25);
+}
+
+.card .emoji {
+  font-size: 2rem;
+  margin-bottom: 0.6rem;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin: 0.4rem 0;
+  color: #1e1e2f;
+  font-weight: 600;
+}
+
+.card p {
+  color: #6b7280;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* 💬 Chat Input */
+.chat-input {
+  background: white;
+  border-radius: 40px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08);
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+.chat-input input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+  padding: 0.6rem 1rem;
+  font-family: "Poppins", sans-serif;
+  color: #333;
+}
+
+.chat-input input::placeholder {
+  color: #9ca3af;
+}
+
+.chat-input button {
+  border: none;
+  background: #6366f1;
+  color: white;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.chat-input button:hover {
+  background: #4f46e5;
+  transform: scale(1.1);
+}
+
+/* 🤖 Chatbot Icon */
+.chatbot-icon {
+  position: fixed;
+  top: 35px;
+  right: 35px;
+  width: 65px;
+  height: 65px;
+  background: linear-gradient(145deg, #818cf8, #a5b4fc);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.7rem;
+  box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
+  cursor: pointer;
+  transition: 0.3s;
+  z-index: 20;
+}
+
+.chatbot-icon:hover {
+  transform: scale(1.1);
+  box-shadow: 0 10px 35px rgba(99, 102, 241, 0.45);
+}
+
+/* Tooltip */
+.chatbot-icon .tooltip {
+  position: absolute;
+  top: -40px;
+  right: 80px;
+  background: white;
+  color: #4f46e5;
+  font-size: 0.9rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 10px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  transform: translateY(5px);
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.chatbot-icon:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ✨ Animations for Smooth UI */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-  a:hover {
-    color: #747bff;
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+.main h1,
+.cards,
+.chat-input,
+.chatbot-icon {
+  animation: fadeIn 0.8s ease forwards;
+}
+
+/* 📱 Responsive */
+@media (max-width: 768px) {
+  .main {
+    margin-left: 0;
+    padding: 2rem;
+  }
+
+  .cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 80%;
+  }
+
+  .chat-input {
+    max-width: 90%;
   }
 }

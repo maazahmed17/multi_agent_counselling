@@ -4,7 +4,7 @@ expertMode = true
 
 [nix]
 channel = "stable-25_05"
-packages = ["arrow-cpp", "borgbackup", "cairo", "cargo", "ffmpeg-full", "freetype", "ghostscript", "gitFull", "glibcLocales", "go", "gobject-introspection", "gtk3", "libcxx", "libiconv", "libjpeg_turbo", "libpng", "libuv", "libxcrypt", "llvm", "openssl", "pkg-config", "py-spy", "qhull", "rustc", "tcl", "tk", "which"]
+packages = ["arrow-cpp", "borgbackup", "cairo", "cargo", "ffmpeg-full", "freetype", "ghostscript", "gitFull", "glibcLocales", "go", "gobject-introspection", "gtk3", "libcxx", "libiconv", "libjpeg_turbo", "libpng", "libuv", "libxcrypt", "llvm", "openssl", "pkg-config", "py-spy", "qhull", "rustc", "tcl", "tk", "which", "python313Packages.conda"]
 
 [workflows]
 runButton = "Project"
