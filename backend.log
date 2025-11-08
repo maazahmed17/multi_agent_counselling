@@ -1,0 +1,33 @@
+🚀 Initializing CompanionAI Multi-Agent System...
+✅ LLM Client initialized (Groq Direct API)
+   - Instruct Model: llama-3.3-70b-versatile
+   - Guard Model: meta-llama/llama-guard-4-12b
+✅ Router Agent initialized
+✅ Anxiety Specialist initialized
+✅ Judge Agent initialized
+✅ Multi-Agent System Ready!
+
+⚠️  Running without Replit DB
+
+============================================================
+🚀 Starting CompanionAI Server
+============================================================
+Backend: http://0.0.0.0:3000
+Frontend: http://0.0.0.0:5000
+============================================================
+
+ * Serving Flask app 'app'
+ * Debug mode: on
+[31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:3000
+ * Running on http://172.25.202.27:3000
+[33mPress CTRL+C to quit[0m
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 125-017-482
+127.0.0.1 - - [08/Nov/2025 12:24:41] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2025 12:26:09] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2025 12:26:49] "GET /api/health HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2025 12:25:41] "POST /api/chat HTTP/1.1" 200 -
+127.0.0.1 - - [08/Nov/2025 12:26:57] "GET /api/health HTTP/1.1" 200 -

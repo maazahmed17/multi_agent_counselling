@@ -11,6 +11,12 @@ import {
 
 const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || "/api";
 
+// Debug logging
+if (typeof window !== 'undefined') {
+  console.log('🔧 API_BASE_URL:', API_BASE_URL);
+  console.log('🔧 VITE_BACKEND_URL:', import.meta.env.VITE_BACKEND_URL);
+}
+
 export default function SerenityDashboard() {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
@@ -20,6 +26,7 @@ export default function SerenityDashboard() {
 
   const sendMessage = async (messageText) => {
     console.log("🔵 sendMessage called!", messageText);
+    console.log("📍 API_BASE_URL being used:", API_BASE_URL);
     if (!messageText.trim() || isLoading) {
       console.log("❌ Blocked - empty or loading");
       return;
