@@ -27,13 +27,23 @@ A full-stack mental health support application featuring a multi-agent AI system
 
 ## Recent Changes (November 8, 2025)
 
-### **Complete UI Redesign to Match Reference Image**
+### **Backend Connectivity Fixed for Replit Environment**
 
-**Backend Connectivity Fixes:**
-- Fixed API calls to use `VITE_BACKEND_URL` environment variable for production compatibility
-- Replaced deprecated `onKeyPress` with `onKeyDown` for React 18 compatibility
+**Port Configuration:**
+- Backend: Running on `0.0.0.0:8000` (accessible via Replit public URL)
+- Frontend: Running on `0.0.0.0:5000` (Replit webview port)
+- CORS: Enabled for cross-origin requests
+
+**Proxy-Based Architecture:**
+- Frontend uses Vite proxy (`/api`) to communicate with backend
+- Removed direct `VITE_BACKEND_URL` to ensure proxy fallback works correctly
+- Vite proxy forwards `/api/*` → `localhost:8000` on server side
+- This architecture works in both development and Replit production environments
+
+**Code Quality:**
+- Removed conflicting `frontend/src/app.js` (old vanilla JS file)
+- Fixed deprecated `onKeyPress` → `onKeyDown` for React 18 compatibility
 - Added explicit error handling with HTTP status checks
-- Backend running on port 3000, frontend on port 5000
 
 **UI Redesign - Matching Reference Image:**
 - **Chatbot Mascot**: Large 128px robot emoji (🤖) with animated floating effect
