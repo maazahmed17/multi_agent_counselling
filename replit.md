@@ -30,13 +30,10 @@ A full-stack mental health support application featuring a multi-agent AI system
 ### **Complete UI Redesign to Match Reference Image**
 
 **Backend Connectivity Fixes:**
-- Backend reconfigured to run on 0.0.0.0:8000 (as specified)
-- Frontend uses localhost:8000 with Vite proxy for API calls
+- Fixed API calls to use `VITE_BACKEND_URL` environment variable for production compatibility
 - Replaced deprecated `onKeyPress` with `onKeyDown` for React 18 compatibility
-- Removed conflicting old vanilla JavaScript files (app.js)
-- Fixed index.html to properly load React app via main.jsx
-- Backend running on port 8000, frontend on port 5000
-- CORS properly configured for cross-origin requests
+- Added explicit error handling with HTTP status checks
+- Backend running on port 3000, frontend on port 5000
 
 **UI Redesign - Matching Reference Image:**
 - **Chatbot Mascot**: Large 128px robot emoji (🤖) with animated floating effect
