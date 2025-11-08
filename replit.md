@@ -1,41 +1,59 @@
 # CompanionAI Anxiety Specialist
 
 ## Overview
-This is a machine learning project for fine-tuning Meta's Llama 3.1 8B model to create a specialized anxiety support chatbot using Cognitive Behavioral Therapy (CBT) principles. The project uses QLoRA (Quantized Low-Rank Adaptation) for memory-efficient fine-tuning optimized for RTX 4060 8GB GPU.
+A full-stack mental health support application featuring a multi-agent AI system powered by Groq's Llama 3.3 70B model. The application provides anxiety support using CBT principles through an intelligent routing system, specialized agents, and quality evaluation.
 
 ## Project Structure
-- `anxiety.py` - Main training script with memory-optimized settings for RTX 4060 8GB
-- `validate_setup.py` - Pre-training validation suite to check system resources and dependencies
-- `validate_model.py` - Post-training validation and model quality assessment
-- `test_llama-3.py` - Quick test script for Llama model loading with quantization
-- `test_guard.py` - Safety classification testing
-- `dataset_loader.py` - Dataset loading and preprocessing utilities
-- `models/anxiety_specialist_v1/` - Trained LoRA adapter weights and configuration
-- `eval_outputs/` - Evaluation metrics and results
-- `validation_results/` - Model validation outputs
 
-## Recent Changes
-- Initial project import to Replit environment
-- Set up Python 3.11 environment
-- Installed core ML dependencies (PyTorch CPU, Transformers, PEFT, etc.)
+### Backend (Python/Flask)
+- `app.py` - Flask API server exposing multi-agent system endpoints
+- `demo/agents/` - Multi-agent system components
+  - `router_agent.py` - Routes user messages to appropriate specialists
+  - `anxiety_specialist.py` - CBT-based anxiety support agent
+  - `judge_agent.py` - Evaluates and approves responses for quality
+  - `test_agents.py` - Testing script for agent functionality
+- `demo/core/llm_client.py` - Direct HTTP client for Groq API (no SDK dependencies)
+
+### Frontend (React/Vite)
+- `frontend/src/` - React application
+  - `SerenityDashboard.jsx` - Main chat interface with beautiful UI
+  - `App.jsx` - Application entry point
+- `frontend/vite.config.js` - Vite configuration with proxy to backend API
+
+### ML Components (Training - Not Active)
+- `anxiety.py` - Original training script for Llama fine-tuning
+- `models/anxiety_specialist_v1/` - Trained LoRA adapter weights
+- `eval_outputs/` - Evaluation metrics and results
+
+## Recent Changes (November 8, 2025)
+- Created Flask API server to expose multi-agent system
+- Integrated React frontend with backend API
+- Set up Vite development server with proxy configuration
+- Configured workflows for both frontend (port 5000) and backend (port 8000)
+- Fixed Tailwind CSS PostCSS configuration
+- Tested full integration successfully with 9.0/10 approval from Judge Agent
 
 ## Architecture
 
-### Technology Stack
+### Current Stack (Production)
+- **Frontend**: React + Vite + Tailwind CSS + Framer Motion
+- **Backend**: Flask (Python) REST API
+- **LLM Provider**: Groq API (Llama 3.3 70B Versatile)
+- **Multi-Agent System**: Router → Specialist → Judge workflow
+- **UI Framework**: React Icons, responsive design
+
+### Multi-Agent Workflow
+1. **Router Agent**: Analyzes user input and routes to appropriate specialist
+2. **Anxiety Specialist Agent**: Generates CBT-based supportive responses
+3. **Judge Agent**: Evaluates response quality (empathy, safety, clinical accuracy)
+4. Response only sent to user if approved by Judge Agent
+
+### Original ML Stack (Training Components - Inactive)
 - **Base Model**: Meta Llama 3.1 8B Instruct
 - **Fine-tuning Method**: QLoRA (4-bit quantization + LoRA)
 - **Framework**: PyTorch, HuggingFace Transformers, PEFT
 - **Training**: TRL (Transformer Reinforcement Learning)
 - **Optimization**: BitsAndBytes 4-bit quantization
-
-### Memory Optimization
-The training is configured for 8GB VRAM with:
-- 4-bit NF4 quantization
-- LoRA rank 8, alpha 16
-- Max sequence length: 512 tokens
-- Batch size: 1 with gradient accumulation (32 steps)
-- FP16 mixed precision training
-- Gradient checkpointing enabled
 
 ## Important Notes
 
