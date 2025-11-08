@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiHome, FiBookOpen, FiSettings, FiUser, FiSend, FiMic, FiMessageCircle } from "react-icons/fi";
+import { FiHome, FiBookOpen, FiSettings, FiUser, FiSend, FiMic } from "react-icons/fi";
+
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL || '/api';
 
 export default function SerenityDashboard() {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(true);
 
   const sendMessage = async (messageText) => {
     if (!messageText.trim() || isLoading) return;
@@ -18,13 +19,17 @@ export default function SerenityDashboard() {
     setIsLoading(true);
     
     try {
-      const response = await fetch('/api/chat', {
+      const response = await fetch(`${API_BASE_URL}/chat`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ message: userMessage }),
       });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
       
       const data = await response.json();
       
@@ -45,7 +50,7 @@ export default function SerenityDashboard() {
       console.error('Error:', error);
       setChatHistory(prev => [...prev, { 
         type: 'error', 
-        text: 'Unable to connect to the server. Please try again.' 
+        text: `Unable to connect to the server. Please try again. (${error.message})` 
       }]);
     } finally {
       setIsLoading(false);
@@ -60,106 +65,99 @@ export default function SerenityDashboard() {
     sendMessage(cardMessage);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSend();
+    }
+  };
+
   return (
-    <div className="min-h-screen flex bg-gradient-to-br from-[#E0E9FF] to-[#F6F6F9] text-gray-900">
+    <div className="min-h-screen flex bg-gradient-to-br from-[#E8E9FF] via-[#F5F3FF] to-[#FCF5FF] text-gray-900 relative overflow-hidden">
+      {/* Decorative gradient orbs */}
+      <div className="absolute top-0 right-0 w-96 h-96 bg-purple-300/20 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-96 h-96 bg-indigo-300/20 rounded-full blur-3xl"></div>
+      
       {/* Sidebar */}
-      <aside className="w-20 flex flex-col items-center py-8 space-y-6 bg-white/50 backdrop-blur-xl rounded-r-3xl shadow-md">
-        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-indigo-600 text-white text-2xl font-bold">M</div>
-        <nav className="flex flex-col gap-6 text-gray-600 text-2xl">
-          <FiHome className="hover:text-indigo-600 cursor-pointer transition" />
-          <FiBookOpen className="hover:text-indigo-600 cursor-pointer transition" />
-          <FiUser className="hover:text-indigo-600 cursor-pointer transition" />
-          <FiSettings className="hover:text-indigo-600 cursor-pointer transition" />
+      <aside className="w-20 flex flex-col items-center py-8 space-y-8 bg-white/40 backdrop-blur-md shadow-sm z-10">
+        <div className="w-12 h-12 flex items-center justify-center rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 text-white text-xl font-bold shadow-lg">
+          M
+        </div>
+        <nav className="flex flex-col gap-8 text-gray-500 text-2xl">
+          <FiHome className="hover:text-indigo-600 cursor-pointer transition-colors" />
+          <FiBookOpen className="hover:text-indigo-600 cursor-pointer transition-colors" />
+          <FiUser className="hover:text-indigo-600 cursor-pointer transition-colors" />
+          <FiSettings className="hover:text-indigo-600 cursor-pointer transition-colors" />
         </nav>
       </aside>
 
-      {/* Floating Chatbot Icon with Tooltip */}
-      <motion.div 
-        className="fixed top-6 right-6 z-50"
-        initial={{ opacity: 0, scale: 0 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.5, type: "spring" }}
-        onMouseEnter={() => setShowTooltip(true)}
-        onMouseLeave={() => setTimeout(() => setShowTooltip(false), 2000)}
-      >
-        <div className="relative">
-          <motion.div
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.95 }}
-            className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center cursor-pointer shadow-2xl"
-          >
-            <FiMessageCircle className="text-white text-3xl" />
-          </motion.div>
-          
-          <AnimatePresence>
-            {showTooltip && (
-              <motion.div
-                initial={{ opacity: 0, x: 10 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: 10 }}
-                className="absolute right-20 top-2 bg-white px-4 py-2 rounded-2xl shadow-lg whitespace-nowrap"
-              >
-                <p className="text-sm font-medium text-gray-800">Hi there! 🌈 Need a boost?</p>
-                <div className="absolute right-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.div>
-
       {/* Main Content */}
-      <main className="flex-1 flex flex-col justify-center px-16 py-10 relative">
-        <div className="max-w-4xl mx-auto">
-          <h1 className="text-4xl font-semibold mb-10">
-            Hi, Ready to Start Your <span className="text-indigo-600">Healing Journey?</span>
-          </h1>
+      <main className="flex-1 flex flex-col items-center justify-center px-8 py-12 relative z-10">
+        <div className="w-full max-w-5xl">
+          {/* Header */}
+          <motion.h1 
+            className="text-5xl font-bold text-center mb-16"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            Hi, Ready to Start Your{" "}
+            <span className="bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text text-transparent">
+              Healing Journey?
+            </span>
+          </motion.h1>
 
           {/* Cards - Only show when no chat history */}
           {chatHistory.length === 0 && (
-            <div className="grid md:grid-cols-3 gap-6 mb-12">
+            <motion.div 
+              className="grid md:grid-cols-3 gap-8 mb-20"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+            >
               <motion.div 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -5 }} 
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleCardClick("I'm feeling anxious and could use some support")}
-                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+                className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 cursor-pointer border border-white/50 transition-all hover:shadow-2xl"
               >
-                <div className="text-4xl mb-3">😊</div>
-                <h3 className="text-xl font-semibold mb-1">I feel anxious</h3>
-                <p className="text-gray-500 text-sm">Get support</p>
+                <div className="text-5xl mb-4">😊</div>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-800">I feel anxious</h3>
+                <p className="text-gray-600 text-sm">Get support</p>
               </motion.div>
 
               <motion.div 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -5 }} 
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleCardClick("I'm doing okay, just wanted to check in and have a chat")}
-                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+                className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 cursor-pointer border border-white/50 transition-all hover:shadow-2xl"
               >
-                <div className="text-4xl mb-3">🔒</div>
-                <h3 className="text-xl font-semibold mb-1">I'm doing okay</h3>
-                <p className="text-gray-500 text-sm">Let's have a chat</p>
+                <div className="text-5xl mb-4">🔒</div>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-800">I'm doing okay</h3>
+                <p className="text-gray-600 text-sm">Let's have a chat</p>
               </motion.div>
 
               <motion.div 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.05, y: -5 }} 
+                whileTap={{ scale: 0.98 }}
                 onClick={() => handleCardClick("I need help now and need to talk to someone urgently")}
-                className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer"
+                className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 cursor-pointer border border-white/50 transition-all hover:shadow-2xl"
               >
-                <div className="text-4xl mb-3">⚠️</div>
-                <h3 className="text-xl font-semibold mb-1">I need help now</h3>
-                <p className="text-gray-500 text-sm">Access resources</p>
+                <div className="text-5xl mb-4">⚠️</div>
+                <h3 className="text-2xl font-semibold mb-2 text-gray-800">I need help now</h3>
+                <p className="text-gray-600 text-sm">Access resources</p>
               </motion.div>
-            </div>
+            </motion.div>
           )}
 
           {/* Chat History */}
           {chatHistory.length > 0 && (
-            <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 max-h-96 overflow-y-auto">
+            <div className="bg-white/70 backdrop-blur-md rounded-3xl shadow-xl p-8 mb-8 max-h-96 overflow-y-auto border border-white/50">
               {chatHistory.map((msg, index) => (
                 <div key={index} className={`mb-4 ${msg.type === 'user' ? 'text-right' : 'text-left'}`}>
-                  <div className={`inline-block max-w-[80%] p-3 rounded-2xl ${
+                  <div className={`inline-block max-w-[80%] p-4 rounded-2xl ${
                     msg.type === 'user' 
-                      ? 'bg-indigo-600 text-white' 
+                      ? 'bg-gradient-to-r from-indigo-600 to-purple-600 text-white' 
                       : msg.type === 'error'
                       ? 'bg-red-100 text-red-800'
                       : 'bg-gray-100 text-gray-900'
@@ -176,7 +174,7 @@ export default function SerenityDashboard() {
               ))}
               {isLoading && (
                 <div className="text-left mb-4">
-                  <div className="inline-block bg-gray-100 text-gray-900 p-3 rounded-2xl">
+                  <div className="inline-block bg-gray-100 text-gray-900 p-4 rounded-2xl">
                     <p className="animate-pulse">Thinking...</p>
                   </div>
                 </div>
@@ -184,44 +182,91 @@ export default function SerenityDashboard() {
             </div>
           )}
 
-          {/* Chat Input */}
-          <div className="flex items-center bg-white rounded-full shadow-lg px-6 py-3 w-full max-w-2xl mx-auto">
-            <input
-              type="text"
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
-              placeholder="Type your thoughts..."
-              className="flex-1 bg-transparent focus:outline-none text-gray-700"
-              disabled={isLoading}
-            />
-            <div className="flex items-center gap-4">
-              <FiMic className="text-gray-500 text-xl cursor-pointer hover:text-indigo-600 transition" />
-              <button
-                onClick={handleSend}
-                className="bg-indigo-600 text-white rounded-full p-2 hover:bg-indigo-700 transition"
-              >
-                <FiSend />
-              </button>
+          {/* Chat Input - Fixed at bottom center */}
+          <motion.div 
+            className="fixed bottom-8 left-1/2 transform -translate-x-1/2 w-full max-w-3xl px-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            <div className="flex items-center bg-white/80 backdrop-blur-md rounded-full shadow-2xl px-6 py-4 border border-white/50">
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Type your thoughts..."
+                className="flex-1 bg-transparent focus:outline-none text-gray-700 placeholder-gray-400 text-base"
+                disabled={isLoading}
+              />
+              <div className="flex items-center gap-3 ml-4">
+                <button
+                  className="text-gray-500 hover:text-indigo-600 transition-colors p-2"
+                  aria-label="Voice input"
+                >
+                  <FiMic className="text-xl" />
+                </button>
+                <button
+                  onClick={handleSend}
+                  disabled={isLoading || !message.trim()}
+                  className="bg-gradient-to-r from-indigo-600 to-purple-600 text-white rounded-full p-3 hover:shadow-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  aria-label="Send message"
+                >
+                  <FiSend className="text-lg" />
+                </button>
+              </div>
             </div>
-          </div>
+          </motion.div>
         </div>
-
-        {/* Mascot */}
-        <motion.div
-          className="absolute top-20 right-32 flex flex-col items-center"
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-        >
-          <div className="bg-white rounded-2xl shadow-md px-4 py-2 text-sm mb-2">
-            Hi there! 🌈 Need a boost?
-          </div>
-          <div className="w-24 h-24 bg-gradient-to-br from-indigo-500 to-purple-400 rounded-full flex items-center justify-center text-white text-3xl font-bold shadow-lg">
-            🤖
-          </div>
-        </motion.div>
       </main>
+
+      {/* Floating Chatbot Mascot - Positioned right side */}
+      <motion.div
+        className="fixed top-20 right-12 flex flex-col items-center z-50"
+        initial={{ opacity: 0, scale: 0, rotate: -180 }}
+        animate={{ opacity: 1, scale: 1, rotate: 0 }}
+        transition={{ 
+          duration: 0.8,
+          delay: 0.6,
+          type: "spring",
+          stiffness: 200
+        }}
+      >
+        {/* Speech Bubble */}
+        <AnimatePresence>
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2 }}
+            className="bg-white rounded-2xl shadow-lg px-4 py-2 mb-3 relative"
+          >
+            <p className="text-sm font-medium text-gray-700 whitespace-nowrap">
+              Hi there! 🌈 Need a boost?
+            </p>
+            {/* Speech bubble tail */}
+            <div className="absolute bottom-[-8px] left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-l-transparent border-r-8 border-r-transparent border-t-8 border-t-white"></div>
+          </motion.div>
+        </AnimatePresence>
+        
+        {/* Robot Mascot */}
+        <motion.div
+          className="w-32 h-32 bg-gradient-to-br from-indigo-500 via-purple-500 to-purple-600 rounded-full flex items-center justify-center shadow-2xl border-4 border-white"
+          whileHover={{ scale: 1.1, rotate: 5 }}
+          whileTap={{ scale: 0.95 }}
+          animate={{ 
+            y: [0, -10, 0],
+          }}
+          transition={{
+            y: {
+              duration: 2,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }
+          }}
+        >
+          <span className="text-6xl">🤖</span>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
