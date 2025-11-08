@@ -4,11 +4,51 @@ import { FiHome, FiBookOpen, FiSettings, FiUser, FiSend, FiMic } from "react-ico
 
 export default function SerenityDashboard() {
   const [message, setMessage] = useState("");
+  const [chatHistory, setChatHistory] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSend = () => {
-    if (!message.trim()) return;
-    console.log("User message:", message);
+  const handleSend = async () => {
+    if (!message.trim() || isLoading) return;
+    
+    const userMessage = message.trim();
     setMessage("");
+    
+    setChatHistory(prev => [...prev, { type: 'user', text: userMessage }]);
+    setIsLoading(true);
+    
+    try {
+      const response = await fetch('/api/chat', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+      
+      const data = await response.json();
+      
+      if (data.success) {
+        setChatHistory(prev => [...prev, { 
+          type: 'assistant', 
+          text: data.response,
+          specialist: data.specialist,
+          evaluation: data.evaluation
+        }]);
+      } else {
+        setChatHistory(prev => [...prev, { 
+          type: 'error', 
+          text: 'Sorry, something went wrong. Please try again.' 
+        }]);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      setChatHistory(prev => [...prev, { 
+        type: 'error', 
+        text: 'Unable to connect to the server. Please try again.' 
+      }]);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -31,26 +71,60 @@ export default function SerenityDashboard() {
             Hi, Ready to Start Your <span className="text-indigo-600">Healing Journey?</span>
           </h1>
 
-          {/* Cards */}
-          <div className="grid md:grid-cols-3 gap-6 mb-12">
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
-              <div className="text-4xl mb-3">😊</div>
-              <h3 className="text-xl font-semibold mb-1">I feel anxious</h3>
-              <p className="text-gray-500 text-sm">Get support</p>
-            </motion.div>
+          {/* Cards - Only show when no chat history */}
+          {chatHistory.length === 0 && (
+            <div className="grid md:grid-cols-3 gap-6 mb-12">
+              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+                <div className="text-4xl mb-3">😊</div>
+                <h3 className="text-xl font-semibold mb-1">I feel anxious</h3>
+                <p className="text-gray-500 text-sm">Get support</p>
+              </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
-              <div className="text-4xl mb-3">🔒</div>
-              <h3 className="text-xl font-semibold mb-1">I'm doing okay</h3>
-              <p className="text-gray-500 text-sm">Let's have a chat</p>
-            </motion.div>
+              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+                <div className="text-4xl mb-3">🔒</div>
+                <h3 className="text-xl font-semibold mb-1">I'm doing okay</h3>
+                <p className="text-gray-500 text-sm">Let's have a chat</p>
+              </motion.div>
 
-            <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
-              <div className="text-4xl mb-3">⚠️</div>
-              <h3 className="text-xl font-semibold mb-1">I need help now</h3>
-              <p className="text-gray-500 text-sm">Access resources</p>
-            </motion.div>
-          </div>
+              <motion.div whileHover={{ scale: 1.05 }} className="bg-white rounded-2xl shadow-lg p-6 cursor-pointer">
+                <div className="text-4xl mb-3">⚠️</div>
+                <h3 className="text-xl font-semibold mb-1">I need help now</h3>
+                <p className="text-gray-500 text-sm">Access resources</p>
+              </motion.div>
+            </div>
+          )}
+
+          {/* Chat History */}
+          {chatHistory.length > 0 && (
+            <div className="bg-white rounded-2xl shadow-lg p-6 mb-6 max-h-96 overflow-y-auto">
+              {chatHistory.map((msg, index) => (
+                <div key={index} className={`mb-4 ${msg.type === 'user' ? 'text-right' : 'text-left'}`}>
+                  <div className={`inline-block max-w-[80%] p-3 rounded-2xl ${
+                    msg.type === 'user' 
+                      ? 'bg-indigo-600 text-white' 
+                      : msg.type === 'error'
+                      ? 'bg-red-100 text-red-800'
+                      : 'bg-gray-100 text-gray-900'
+                  }`}>
+                    <p className="whitespace-pre-wrap">{msg.text}</p>
+                    {msg.specialist && (
+                      <p className="text-xs mt-2 opacity-70">Specialist: {msg.specialist}</p>
+                    )}
+                    {msg.evaluation && msg.evaluation.approved && (
+                      <p className="text-xs mt-1 opacity-70">✓ Approved (Score: {msg.evaluation.overall_score}/10)</p>
+                    )}
+                  </div>
+                </div>
+              ))}
+              {isLoading && (
+                <div className="text-left mb-4">
+                  <div className="inline-block bg-gray-100 text-gray-900 p-3 rounded-2xl">
+                    <p className="animate-pulse">Thinking...</p>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* Chat Input */}
           <div className="flex items-center bg-white rounded-full shadow-lg px-6 py-3 w-full max-w-2xl mx-auto">
@@ -58,8 +132,10 @@ export default function SerenityDashboard() {
               type="text"
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              onKeyPress={(e) => e.key === 'Enter' && handleSend()}
               placeholder="Type your thoughts..."
               className="flex-1 bg-transparent focus:outline-none text-gray-700"
+              disabled={isLoading}
             />
             <div className="flex items-center gap-4">
               <FiMic className="text-gray-500 text-xl cursor-pointer hover:text-indigo-600 transition" />
