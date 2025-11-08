@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { motion } from "framer-motion";
-import { FiHome, FiBookOpen, FiSettings, FiUser, FiSend, FiMic } from "react-icons/fi";
+import { motion, AnimatePresence } from "framer-motion";
+import { FiHome, FiBookOpen, FiSettings, FiUser, FiSend, FiMic, FiMessageCircle } from "react-icons/fi";
 
 export default function SerenityDashboard() {
   const [message, setMessage] = useState("");
   const [chatHistory, setChatHistory] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [showTooltip, setShowTooltip] = useState(true);
 
   const sendMessage = async (messageText) => {
     if (!messageText.trim() || isLoading) return;
@@ -71,6 +72,40 @@ export default function SerenityDashboard() {
           <FiSettings className="hover:text-indigo-600 cursor-pointer transition" />
         </nav>
       </aside>
+
+      {/* Floating Chatbot Icon with Tooltip */}
+      <motion.div 
+        className="fixed top-6 right-6 z-50"
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.5, type: "spring" }}
+        onMouseEnter={() => setShowTooltip(true)}
+        onMouseLeave={() => setTimeout(() => setShowTooltip(false), 2000)}
+      >
+        <div className="relative">
+          <motion.div
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+            className="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-full flex items-center justify-center cursor-pointer shadow-2xl"
+          >
+            <FiMessageCircle className="text-white text-3xl" />
+          </motion.div>
+          
+          <AnimatePresence>
+            {showTooltip && (
+              <motion.div
+                initial={{ opacity: 0, x: 10 }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: 10 }}
+                className="absolute right-20 top-2 bg-white px-4 py-2 rounded-2xl shadow-lg whitespace-nowrap"
+              >
+                <p className="text-sm font-medium text-gray-800">Hi there! 🌈 Need a boost?</p>
+                <div className="absolute right-[-8px] top-1/2 transform -translate-y-1/2 w-0 h-0 border-t-8 border-t-transparent border-b-8 border-b-transparent border-l-8 border-l-white"></div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </motion.div>
 
       {/* Main Content */}
       <main className="flex-1 flex flex-col justify-center px-16 py-10 relative">

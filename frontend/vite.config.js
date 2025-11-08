@@ -6,12 +6,12 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: "0.0.0.0",
-    port: 5000,
-    strictPort: true,
+    port: parseInt(process.env.VITE_PORT) || 5000,
+    strictPort: false,
     allowedHosts: true,
     proxy: {
       "/api": {
-        target: "http://localhost:8000",
+        target: process.env.VITE_BACKEND_URL || "http://localhost:3000",
         changeOrigin: true,
       },
     },

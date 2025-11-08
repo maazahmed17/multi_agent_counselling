@@ -26,21 +26,37 @@ A full-stack mental health support application featuring a multi-agent AI system
 - `eval_outputs/` - Evaluation metrics and results
 
 ## Recent Changes (November 8, 2025)
-- Created Flask API server to expose multi-agent system
-- Integrated React frontend with backend API
-- Set up Vite development server with proxy configuration
-- Configured workflows for both frontend (port 5000) and backend (port 8000)
-- Fixed Tailwind CSS PostCSS configuration
-- Tested full integration successfully with 9.0/10 approval from Judge Agent
+- **Phase 1 - Port Reconfiguration:**
+  - Reconfigured frontend to run on port 5000 (Replit webview requirement)
+  - Moved backend from port 8000 to port 3000
+  - Created frontend/.env with environment variables
+  - Updated vite.config.js with dynamic port configuration and proxy settings
+  - Updated workflows for both services with proper output types
+  
+- **Phase 2 - UI Redesign:**
+  - Added Poppins font family for clean, modern typography
+  - Implemented floating chatbot icon (top-right) with animated tooltip "Hi there! 🌈 Need a boost?"
+  - Enhanced three interactive cards with click handlers for instant messaging
+  - Maintained soft pastel gradient background (lavender to white)
+  - Added smooth animations using Framer Motion
+  - Optimized responsive design with Tailwind CSS
+  
+- **Phase 3 - Testing & Polish:**
+  - Tested full multi-agent integration (Router → Anxiety Specialist → Judge)
+  - Verified 9.0/10 approval score from Judge Agent
+  - Created backend.log and frontend.log files for monitoring
+  - Fixed all console errors and warnings
+  - Verified all API endpoints functioning correctly
 
 ## Architecture
 
 ### Current Stack (Production)
-- **Frontend**: React + Vite + Tailwind CSS + Framer Motion
-- **Backend**: Flask (Python) REST API
+- **Frontend**: React + Vite + Tailwind CSS + Framer Motion (Port 5000)
+- **Backend**: Flask (Python) REST API (Port 3000)
 - **LLM Provider**: Groq API (Llama 3.3 70B Versatile)
 - **Multi-Agent System**: Router → Specialist → Judge workflow
-- **UI Framework**: React Icons, responsive design
+- **UI Framework**: React Icons, Poppins font, responsive design
+- **Design**: Calming pastel theme with floating chatbot, animated tooltips
 
 ### Multi-Agent Workflow
 1. **Router Agent**: Analyzes user input and routes to appropriate specialist

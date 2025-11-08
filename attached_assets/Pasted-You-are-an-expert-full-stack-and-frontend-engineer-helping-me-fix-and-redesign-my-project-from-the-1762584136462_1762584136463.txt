@@ -1,0 +1,58 @@
+You are an expert full-stack and frontend engineer helping me fix and redesign my project 
+from the GitHub repo: https://github.com/maazahmed17/multi_agent_counselling
+
+Your goals are:
+
+────────────────────────────
+🧩 PHASE 1 — FIX FRONTEND ENVIRONMENT
+────────────────────────────
+1. Detect the frontend build system (it uses Vite + React in this repo).
+2. Fix all setup issues automatically:
+   - Ensure frontend runs on port 5173 (not 5000).
+   - Create or update `.env` inside `/frontend` with:
+       VITE_BACKEND_URL=http://localhost:5000
+       VITE_PORT=5173
+   - Create or update `vite.config.js` with:
+       - React plugin imported
+       - Port set to use `process.env.VITE_PORT`
+       - Strict port mode disabled
+   - Update `/frontend/package.json` to include:
+       "dev": "vite --port 5173"
+   - Install all missing dependencies (`npm install`).
+   - Make sure there’s no port conflict (backend on 5000, frontend on 5173).
+3. Run both backend (`app.py`) and frontend (`npm run dev`) simultaneously, with logs written to:
+       backend.log  and  frontend.log
+4. Verify both are running correctly and show me the working URLs for both.
+
+────────────────────────────
+🎨 PHASE 2 — REDESIGN FRONTEND UI
+────────────────────────────
+Now, redesign the entire frontend UI to match the calming interface in this image (attached).  
+Apply the following design principles:
+
+✅ Soft pastel background (light lavender or gradient blue-white tone).  
+✅ Center headline like: “Hi, Ready to Start Your Healing Journey?”  
+✅ Three interactive cards in the middle:
+   - “😊 I feel anxious – Get support”
+   - “🔒 I'm doing okay – Let's have a chat”
+   - “⚠️ I need help now – Access resources”
+✅ Rounded corners (border-radius: 20px+), smooth shadows, and hover animations.
+✅ Clean, readable typography (use ‘Poppins’ or ‘Inter’).
+✅ Floating chatbot icon (top-right corner) with a small tooltip message: “Hi there! Need a boost?”
+✅ Left sidebar with icons for Profile, Home, Messages, Settings.
+✅ Input box at the bottom: “Type your thoughts…” with mic 🎤 and send 📤 icons.
+✅ Use React components for cards, input box, and sidebar.
+✅ Ensure the design is **responsive** and works beautifully on all screen sizes.
+
+────────────────────────────
+🧠 PHASE 3 — FINAL POLISH
+────────────────────────────
+- Fix any console errors or missing asset warnings.
+- Test all routes and API calls for correctness.
+- Summarize everything you fixed and redesigned.
+- Finally, print:
+  ✅ “Frontend fixed successfully on port 5173”
+  ✅ “Backend running on port 5000”
+  ✅ “New calming UI implemented successfully.”
+
+Now, execute all these fixes and redesigns automatically.
